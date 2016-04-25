@@ -20,7 +20,7 @@ Include the library in your app using the CommonJS style:
 
 Or in the ES6 import style:
 
-`import {ImmunizationTable} from './pediatric-immunizations-chart.js';`
+`import {ImmunizationTable} from 'pediatric-immunizations-schedule';`
 
 You can also include the JS file via UMD:
 
