@@ -1,6 +1,6 @@
 ## About
 
-#### [Demo](http://)
+#### [Demo](http://icu.iorahealth.com/pediatric-immunization-schedule/)
 
 A small js library for displaying a pediatric immunizations schedule based on CDC recommendations.
 
@@ -76,3 +76,9 @@ App will then be running at localhost:8080
 To build a new release:
 
 `webpack --optimize-minimize`
+
+To update the demo:
+
+1. `git checkout gh-pages`
+2. `git rebase master`
+3. `git push origin gh-pages`
