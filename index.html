@@ -1,0 +1,136 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <style media="screen">
+          body {
+            padding: 20px;
+          }
+
+          .immunization-table {
+            font-size: .9em;
+            border: 1px solid #ccc;
+            width: 100%;
+          }
+
+          .immunization-table .disabledCell {
+            background-color: lightgray;
+          }
+
+          .immunization-table .received {
+            background-color: lightgreen;
+          }
+
+          .immunization-table .due {
+            background-color: lightyellow;
+          }
+
+          .immunization-table .main-cell {
+            font-weight: bold;
+            width: 10%;
+          }
+
+          .immunization-table td {
+            text-align: center;
+          }
+          .immunization-table td .recommended-age {
+            display: block;
+            font-size: .6em;
+          }
+
+          .immunization-table td, th {
+            border: solid 1px #CCC;
+          }
+
+          #editor {
+            width: 280px;
+            display: block;
+            margin-left: auto;
+            background-color: lightyellow;
+            padding: 10px;
+            font-size: .8em;
+          }
+
+          #patientImmunizationHistory {
+            display: block;
+            width: 100%;
+            height: 150px;
+          }
+
+          #updateHistory {
+            display: block;
+            margin-top: 5;
+            float: right;
+          }
+
+          #titleContainer {
+            width: 60%;
+            display: block;
+          }
+
+          #header {
+            display: -webkit-flex;
+            display: flex;
+            margin-bottom: 20px;
+          }
+        </style>
+        <script type="text/javascript" src="./dist/pediatric-immunizations-chart.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+        <div id="header">
+          <div id="titleContainer">
+            <h2>Pediatric Immunization Table</h2>
+            <p>
+              Display immunization history and recommended vaccines (based on CDC recommendations) to help spot what's missing and what's currently recommended.
+            </p>
+            <p>
+              Update the textarea to the right to see how modifying the immunization history changes the chart.
+            </p>
+          </div>
+          <div id="editor">
+            <h3>Patient Immunization History (accepts <a href="http://www.bluebuttonjs.com/">bluebutton.js</a> immunization json format)</h3>
+            <textarea id="patientImmunizationHistory">
+            [
+              {
+                "date": "05/10/2012",
+                "product": {
+                  "name": "HepB Vaccine"
+                }
+              },
+              {
+                "date": "08/10/2012",
+                "product": {
+                  "name": "HepB Vaccine"
+                }
+              },
+              {
+                "date": "08/10/2012",
+                "product": {
+                  "name": "DTaP-Hib-IPV"
+                }
+              }
+            ]
+            </textarea>
+            <input type="button" name="updateHistory" value="Update History" id="updateHistory">
+          </div>
+        </div>
+        <div id="container">
+        </div>
+        <script type="text/javascript">
+          var updateHistory = document.getElementById('updateHistory');
+          var container = document.getElementById('container');
+
+          updateHistory.onclick = function() {
+            options = {
+              patientImmunizationHistory: JSON.parse(document.getElementById("patientImmunizationHistory").value)
+            };
+            var immunizationTable = new ImmunizationTable(container, options);
+          };
+
+          options = {
+            patientImmunizationHistory: JSON.parse(document.getElementById("patientImmunizationHistory").value)
+          };
+          var immunizationTable = new ImmunizationTable(container, options);
+        </script>
+    </body>
+</html>

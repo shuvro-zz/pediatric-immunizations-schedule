@@ -1,0 +1,28 @@
+.immunization-table {
+  font-size: .9em;
+}
+
+.immunization-table .disabledCell {
+  background-color: lightgray;
+}
+
+.immunization-table .received {
+  background-color: lightgreen;
+}
+
+.immunization-table .due {
+  background-color: black;
+}
+
+.immunization-table .main-cell {
+  font-weight: bold;
+  width: 10%;
+}
+
+.immunization-table td {
+  text-align: center;
+}
+.immunization-table td .recommended-age {
+  display: block;
+  font-size: .6em;
+}
