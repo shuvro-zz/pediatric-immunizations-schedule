@@ -4,6 +4,8 @@
 
 A small js library for displaying a pediatric immunizations schedule based on CDC recommendations.
 
+The immunization schedule is defined in YAML format here: https://github.com/IoraHealth/pediatric-immunization-schedule/blob/master/src/immunization-schedule.yml Customizing the schedule for different organizations and patient populations is as simple as updating that file. Vaccine name matches that satisfy an immunization "dose" can also be tuned in that file. Matching on codes is currently not supported.
+
 ## Install
 
 The package can be installed with npm:
