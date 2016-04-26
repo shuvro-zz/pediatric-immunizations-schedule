@@ -1,28 +1,28 @@
-.immunization-table {
+.pediatric-immunizations-table {
   font-size: .9em;
 }
 
-.immunization-table .disabledCell {
+.pediatric-immunizations-table .disabledCell {
   background-color: lightgray;
 }
 
-.immunization-table .received {
+.pediatric-immunizations-table .received {
   background-color: lightgreen;
 }
 
-.immunization-table .due {
+.pediatric-immunizations-table .due {
   background-color: black;
 }
 
-.immunization-table .main-cell {
+.pediatric-immunizations-table .main-cell {
   font-weight: bold;
   width: 10%;
 }
 
-.immunization-table td {
+.pediatric-immunizations-table td {
   text-align: center;
 }
-.immunization-table td .recommended-age {
+.pediatric-immunizations-table td .recommended-age {
   display: block;
   font-size: .6em;
 }
