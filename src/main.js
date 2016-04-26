@@ -68,7 +68,7 @@ var ImmunizationTable = function ImmunizationTable(container, options) {
   var table = document.createElement('table'),
       tbody = document.createElement('tbody');
 
-  table.className = 'immunization-table';
+  table.className = 'pediatric-immunizations-schedule';
   table.appendChild(tbody);
 
   this.vacSched.immunizations.map((vac, idx) => {
