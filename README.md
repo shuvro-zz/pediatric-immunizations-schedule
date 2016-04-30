@@ -1,6 +1,6 @@
 ## About
 
-#### [Demo](http://icu.iorahealth.com/pediatric-immunization-schedule/)
+#### [Demo](http://icu.iorahealth.com/pediatric-immunizations-schedule/)
 
 A small js library for displaying a pediatric immunizations schedule based on CDC recommendations.
 
