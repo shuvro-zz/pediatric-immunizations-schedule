@@ -13,12 +13,12 @@ var ImmunizationTable = function ImmunizationTable(container, options) {
 
   this.vacSched = yaml.load(vacSchedYml);
 
-  this.nameMatchTester = function(name, patientImmunization) {
-    return new RegExp('\\b'+name+'\\b').test( patientImmunization.product.name.toLowerCase() );
+  this.nameMatchTester = function(name_match, patientImmunization) {
+    return new RegExp('\\b' + name_match, "i").test(patientImmunization.product.name);
   }
 
   this.patientImmunizationMatchesVacSchedItem = function(patientImmunization, vacSchedItem) {
-    if ( vacSchedItem.name_matches.some((name) => { return this.nameMatchTester(name, patientImmunization) } )) {
+    if ( vacSchedItem.name_matches.some((name_match) => { return this.nameMatchTester(name_match, patientImmunization) } )) {
       return true;
     }
   }
@@ -45,9 +45,12 @@ var ImmunizationTable = function ImmunizationTable(container, options) {
     var immunization = vac.patientImmunizations[dose_number-1];
     if(vac.patientImmunizations.length > 0) {
       if(typeof immunization !== 'undefined') {
+        cell.className = 'received';
+
         var span = document.createElement('span');
         span.innerHTML = immunization.product.name + ' - ' + immunization.date;
-        cell.className = 'received';
+        span.className = 'received__info';
+
         cell.appendChild(span);
       }
     }
@@ -73,12 +76,11 @@ var ImmunizationTable = function ImmunizationTable(container, options) {
 
   this.vacSched.immunizations.map((vac, idx) => {
     var row = tbody.insertRow(idx);
+    row.className = 'pediatric-immunizations-schedule__row--' + vac.name.toLowerCase();
+
     var mainCell = row.insertCell();
     mainCell.appendChild(document.createTextNode(vac.name));
     mainCell.className = 'main-cell';
-    if(typeof vac.combo_vaccines !== "undefined") {
-      mainCell.appendChild(document.createTextNode(vac.combo_vaccines));
-    }
 
     for (var i = 1; i <= this.vacSched.max_dose_count; i++) {
       var cell = row.insertCell(i);
