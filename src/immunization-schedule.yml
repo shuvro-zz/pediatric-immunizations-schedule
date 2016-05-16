@@ -46,7 +46,6 @@ immunizations:
   - 'dtap'
   patientImmunizations: []
 
-
 - name: 'Hib'
   total_doses: 4
   dose_age_recommendation:
@@ -57,6 +56,7 @@ immunizations:
   name_matches:
   - 'hib'
   - 'pentacel'
+  - 'haemophilus influenza type b'
   patientImmunizations: []
 
 - name: 'PCV'
@@ -89,6 +89,7 @@ immunizations:
   - { name: '4 - 6 yrs', month_span: [48,72] }
   name_matches:
   - 'mmr'
+  - 'mmrv'
   patientImmunizations: []
 
 - name: 'HepA'
@@ -116,7 +117,7 @@ immunizations:
 - name: 'Flu'
   total_doses: 5
   name_matches:
-  - 'nothing'
+  - 'influenza vaccine'
   patientImmunizations: []
 
 - name: 'MCV'
