@@ -66,7 +66,7 @@ A JSON object using the BlueButton.js immunization data structure can be passed 
 
 See the source code of the demo for an example.
 
-## Development and building
+## Development
 
 To setup the app for development:
 
@@ -75,11 +75,25 @@ To setup the app for development:
 
 App will then be running at localhost:8080
 
-To build a new release:
+#### Testing
 
-`webpack --optimize-minimize`
+This library uses mocha for testing w/ the Karma runner. Right now it requires Chrome as the launcher (TODO: support phantomjs runs).
 
-To update the demo:
+To run karma in continuous mode that re-runs tests when files change:
+
+`karma start`
+
+To run tests in single-run mode (for CI):
+
+`karma start --single-run`
+
+#### Build and publish a new release
+
+1. Create dist files: `webpack --optimize-minimize`
+- `npm version <update_type>` (See: https://docs.npmjs.com/getting-started/publishing-npm-packages#updating-the-package)
+- Push changed files to master
+
+To update the demo in gh-pages:
 
 1. `git checkout gh-pages`
 2. `git rebase master`
