@@ -82,6 +82,12 @@ immunizations:
   - 'ipv'
   patientImmunizations: []
 
+- name: 'Flu'
+  total_doses: 5
+  name_matches:
+  - 'influenza vaccine'
+  patientImmunizations: []
+
 - name: 'MMR'
   total_doses: 2
   dose_age_recommendation:
@@ -90,6 +96,17 @@ immunizations:
   name_matches:
   - 'mmr'
   - 'mmrv'
+  patientImmunizations: []
+
+- name: 'Varicella'
+  total_doses: 2
+  dose_age_recommendation:
+  - { name: '12 mos', month_span: [12] }
+  - { name: '4 yrs', month_span: [48] }
+  name_matches:
+  - 'varicella'
+  - 'mmrv'
+  - 'proquad'
   patientImmunizations: []
 
 - name: 'HepA'
@@ -114,25 +131,8 @@ immunizations:
   - 'hpv'
   patientImmunizations: []
 
-- name: 'Flu'
-  total_doses: 5
-  name_matches:
-  - 'influenza vaccine'
-  patientImmunizations: []
-
 - name: 'MCV'
   total_doses: 2
   name_matches:
   - 'mcv'
-  patientImmunizations: []
-
-- name: 'Varicella'
-  total_doses: 2
-  dose_age_recommendation:
-  - { name: '12 mos', month_span: [12] }
-  - { name: '4 yrs', month_span: [48] }
-  name_matches:
-  - 'varicella'
-  - 'mmrv'
-  - 'proquad'
   patientImmunizations: []
