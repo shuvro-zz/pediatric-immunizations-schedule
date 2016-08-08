@@ -80,6 +80,7 @@ immunizations:
   - { name: '4 - 6 yrs', month_span: [48,72] }
   name_matches:
   - 'ipv'
+  - 'polio'
   patientImmunizations: []
 
 - name: 'Flu'
