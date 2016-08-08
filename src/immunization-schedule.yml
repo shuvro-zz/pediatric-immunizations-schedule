@@ -83,12 +83,6 @@ immunizations:
   - 'polio'
   patientImmunizations: []
 
-- name: 'Flu'
-  total_doses: 5
-  name_matches:
-  - 'influenza vaccine'
-  patientImmunizations: []
-
 - name: 'MMR'
   total_doses: 2
   dose_age_recommendation:
