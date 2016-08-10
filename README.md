@@ -70,7 +70,7 @@ A JSON object using the BlueButton.js immunization data structure can be passed 
 
 See the source code of the demo for an example.
 
-If you pass in an item in the patientImmunizationHistory object that doesn't match any of the configured immunizations (and therefore won't show up in the table), they are collected and accessible on ```immunizationTable.unusedPatientImmunizations```
+If you pass in an item in the patientImmunizationHistory object that doesn't match any of the configured immunizations (and therefore won't show up in the table), they are collected and accessible on ```immunizationTable.unmatchedPatientImmunizations```
 
 ## Development
 

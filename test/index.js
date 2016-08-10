@@ -5,8 +5,8 @@ import { ImmunizationTable } from '../src/main.js';
 describe('pediatrics immunizations schedule', () => {
   let immunizationTable;
 
-  describe('when there are unused immunizations', () => {
-    let unusedPatientImmunizations;
+  describe('when there are unmatched immunizations', () => {
+    let unmatchedPatientImmunizations;
 
     beforeEach(() => {
       let options = {
@@ -27,12 +27,12 @@ describe('pediatrics immunizations schedule', () => {
       }
 
       immunizationTable = new ImmunizationTable(options);
-      unusedPatientImmunizations = immunizationTable.unusedPatientImmunizations;
+      unmatchedPatientImmunizations = immunizationTable.unmatchedPatientImmunizations;
     });
 
-    it('sets them on unusedPatientImmunizations', () => {
-      expect(unusedPatientImmunizations.length).to.equal(1);
-      expect(unusedPatientImmunizations[0].product.name).to.equal('Cooties Shot');
+    it('sets them on unmatchedPatientImmunizations', () => {
+      expect(unmatchedPatientImmunizations.length).to.equal(1);
+      expect(unmatchedPatientImmunizations[0].product.name).to.equal('Cooties Shot');
     });
   });
 

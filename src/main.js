@@ -13,7 +13,7 @@ var ImmunizationTable = function ImmunizationTable(options) {
 
   this.vacSched = yaml.load(vacSchedYml);
 
-  this.unusedPatientImmunizations = [];
+  this.unmatchedPatientImmunizations = [];
 
   this.nameMatchTester = function(name_match, patientImmunization) {
     return new RegExp('\\b' + name_match, "i").test(patientImmunization.product.name);
@@ -35,7 +35,7 @@ var ImmunizationTable = function ImmunizationTable(options) {
         }
       });
       if (!foundMatch) {
-        this.unusedPatientImmunizations.push(patientImmunization);
+        this.unmatchedPatientImmunizations.push(patientImmunization);
       }
     });
   }
