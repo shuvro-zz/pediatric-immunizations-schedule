@@ -2,7 +2,7 @@ var yaml = require('js-yaml');
 var vacSchedYml = require('raw!./immunization-schedule.yml');
 var _ = require('underscore');
 
-var ImmunizationTable = function ImmunizationTable(container, options) {
+var ImmunizationTable = function ImmunizationTable(options) {
   var defaults = {
     patientImmunizationHistory: [],
     ccdaImport: null, // TODO: accept passing in a CCDA XML string
@@ -12,6 +12,8 @@ var ImmunizationTable = function ImmunizationTable(container, options) {
   this.options = _.extend(defaults, options);
 
   this.vacSched = yaml.load(vacSchedYml);
+
+  this.unusedPatientImmunizations = [];
 
   this.nameMatchTester = function(name_match, patientImmunization) {
     return new RegExp('\\b' + name_match, "i").test(patientImmunization.product.name);
@@ -25,11 +27,16 @@ var ImmunizationTable = function ImmunizationTable(container, options) {
 
   this.mergeImmunizationHistoryWithSchedule = function(vacSched, patientImmunizationHistory) {
     patientImmunizationHistory.map((patientImmunization) => {
+      let foundMatch = false;
       vacSched.immunizations.map((vacSchedItem, idx) => {
         if (this.patientImmunizationMatchesVacSchedItem(patientImmunization, vacSchedItem)) {
           vacSched.immunizations[idx].patientImmunizations.push(patientImmunization);
+          foundMatch = true;
         }
       });
+      if (!foundMatch) {
+        this.unusedPatientImmunizations.push(patientImmunization);
+      }
     });
   }
 
@@ -66,36 +73,38 @@ var ImmunizationTable = function ImmunizationTable(container, options) {
     };
   }
 
-  this.mergeImmunizationHistoryWithSchedule(this.vacSched, this.options.patientImmunizationHistory);
+  this.append = function(container) {
+    var table = document.createElement('table'),
+        tbody = document.createElement('tbody');
 
-  var table = document.createElement('table'),
-      tbody = document.createElement('tbody');
+    table.className = 'pediatric-immunizations-schedule';
+    table.appendChild(tbody);
 
-  table.className = 'pediatric-immunizations-schedule';
-  table.appendChild(tbody);
+    this.vacSched.immunizations.map((vac, idx) => {
+      var row = tbody.insertRow(idx);
+      row.className = 'pediatric-immunizations-schedule__row--' + vac.name.toLowerCase();
 
-  this.vacSched.immunizations.map((vac, idx) => {
-    var row = tbody.insertRow(idx);
-    row.className = 'pediatric-immunizations-schedule__row--' + vac.name.toLowerCase();
+      var mainCell = row.insertCell();
+      mainCell.appendChild(document.createTextNode(vac.name));
+      mainCell.className = 'main-cell';
 
-    var mainCell = row.insertCell();
-    mainCell.appendChild(document.createTextNode(vac.name));
-    mainCell.className = 'main-cell';
-
-    for (var i = 1; i <= this.vacSched.max_dose_count; i++) {
-      var cell = row.insertCell(i);
-      if (i > vac.total_doses) {
-        cell.className = 'disabledCell';
-      } else {
-        this.checkForDue(cell, vac, i, this.options);
-        this.populateRecommendedAgeText(cell, vac, i);
-        this.populatePatientImmunization(cell, vac, i, this.options);
+      for (var i = 1; i <= this.vacSched.max_dose_count; i++) {
+        var cell = row.insertCell(i);
+        if (i > vac.total_doses) {
+          cell.className = 'disabledCell';
+        } else {
+          this.checkForDue(cell, vac, i, this.options);
+          this.populateRecommendedAgeText(cell, vac, i);
+          this.populatePatientImmunization(cell, vac, i, this.options);
+        }
       }
-    }
-  }, this);
+    }, this);
 
-  container.innerHTML = '';
-  container.appendChild(table);
+    container.innerHTML = '';
+    container.appendChild(table);
+  }
+
+  this.mergeImmunizationHistoryWithSchedule(this.vacSched, this.options.patientImmunizationHistory);
 }
 
 exports.ImmunizationTable = ImmunizationTable;
