@@ -124,13 +124,15 @@
             options = {
               patientImmunizationHistory: JSON.parse(document.getElementById("patientImmunizationHistory").value)
             };
-            var immunizationTable = new ImmunizationTable(container, options);
+            var immunizationTable = new ImmunizationTable(options);
+            immunizationTable.append(container);
           };
 
           options = {
             patientImmunizationHistory: JSON.parse(document.getElementById("patientImmunizationHistory").value)
           };
-          var immunizationTable = new ImmunizationTable(container, options);
+          var immunizationTable = new ImmunizationTable(options);
+          immunizationTable.append(container);
         </script>
     </body>
 </html>
