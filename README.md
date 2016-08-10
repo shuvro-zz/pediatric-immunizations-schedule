@@ -28,7 +28,11 @@ You can also include the JS file via UMD:
 
 To load the immunization table into your view:
 
-`new ImmunizationTable([chartContainer], [options]);`
+```
+immunizationTable = new ImmunizationTable([options]);
+immunizationTable.append(chartContainer)
+
+```
 
 `chartContainer` needs to be a reference to the a dom element and `options` is an object. The bare minimum for the options object is an empty object `{}`.
 
@@ -65,6 +69,8 @@ Passing in the patient age months will cause the table to highlight doses that t
 A JSON object using the BlueButton.js immunization data structure can be passed into the library to display a patient's immunization history.
 
 See the source code of the demo for an example.
+
+If you pass in an item in the patientImmunizationHistory object that doesn't match any of the configured immunizations (and therefore won't show up in the table), they are collected and accessible on ```immunizationTable.unusedPatientImmunizations```
 
 ## Development
 
