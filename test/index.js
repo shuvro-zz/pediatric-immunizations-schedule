@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { firstReceivedImmInfo } from './helpers.js';
+import { receivedImmInfo } from './helpers.js';
 import { ImmunizationTable } from '../src/main.js';
 
 describe('pediatrics immunizations schedule', () => {
@@ -43,6 +43,12 @@ describe('pediatrics immunizations schedule', () => {
       let options = {
         patientImmunizationHistory: [
           {
+            date: '08/10/2016',
+            product: {
+              name: 'Pediatric Measles, Mumps and Rubella Vaccine (MMRV)'
+            }
+          },
+          {
             date: '05/10/2016',
             product: {
               name: 'Pediatric Measles, Mumps and Rubella Vaccine (MMRV)'
@@ -74,13 +80,16 @@ describe('pediatrics immunizations schedule', () => {
       expect(numberOfRows).to.equal(10);
     });
 
-    it('should show the matched items from the patient immunization history', () => {
-      const expectedText = 'Pediatric Measles, Mumps and Rubella Vaccine (MMRV) - 05/10/2016';
-      const varicellaReceivedInfo = firstReceivedImmInfo('varicella');
-      const mmrReceivedInfo = firstReceivedImmInfo('mmr');
+    it('should show the matched items from the patient immunization history in order', () => {
+      const varicellaReceivedInfo = receivedImmInfo('varicella');
+      const mmrReceivedInfo = receivedImmInfo('mmr');
+      const expectedFirstText = 'Pediatric Measles, Mumps and Rubella Vaccine (MMRV) - 05/10/2016';
+      const expectedSecondText = 'Pediatric Measles, Mumps and Rubella Vaccine (MMRV) - 08/10/2016';
 
-      expect(varicellaReceivedInfo).to.equal(expectedText);
-      expect(mmrReceivedInfo).to.equal(expectedText);
+      expect(varicellaReceivedInfo[0].innerText).to.equal(expectedFirstText);
+      expect(mmrReceivedInfo[0].innerText).to.equal(expectedFirstText);
+      expect(varicellaReceivedInfo[1].innerText).to.equal(expectedSecondText);
+      expect(mmrReceivedInfo[1].innerText).to.equal(expectedSecondText);
     });
   });
 });

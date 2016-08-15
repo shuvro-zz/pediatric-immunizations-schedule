@@ -38,6 +38,28 @@ var ImmunizationTable = function ImmunizationTable(options) {
         this.unmatchedPatientImmunizations.push(patientImmunization);
       }
     });
+
+  }
+
+  this.sortPatientImmunizations = function() {
+    this.vacSched.immunizations.forEach(immunization => {
+      let sortedPatientImmunizations = immunization.patientImmunizations.sort((immun1, immun2) => {
+        let date1 = new Date(immun1.date);
+        let date2 = new Date(immun2.date);
+
+        if (date1 > date2) {
+          return 1;
+        }
+        else if (date1 < date2) {
+          return -1;
+        }
+        else {
+          return 0;
+        }
+      });
+
+      immunization.patientImmunizations = sortedPatientImmunizations;
+    });
   }
 
   this.populateRecommendedAgeText = function(cell, vac, dose_number) {
@@ -79,7 +101,6 @@ var ImmunizationTable = function ImmunizationTable(options) {
 
     table.className = 'pediatric-immunizations-schedule';
     table.appendChild(tbody);
-
     this.vacSched.immunizations.map((vac, idx) => {
       var row = tbody.insertRow(idx);
       row.className = 'pediatric-immunizations-schedule__row--' + vac.name.toLowerCase();
@@ -105,6 +126,7 @@ var ImmunizationTable = function ImmunizationTable(options) {
   }
 
   this.mergeImmunizationHistoryWithSchedule(this.vacSched, this.options.patientImmunizationHistory);
+  this.sortPatientImmunizations();
 }
 
 exports.ImmunizationTable = ImmunizationTable;

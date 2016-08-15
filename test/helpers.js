@@ -1,6 +1,6 @@
-export const firstReceivedImmInfo = (immunizationName) => {
+export const receivedImmInfo = (immunizationName) => {
   return document
           .querySelector('.pediatric-immunizations-schedule__row--' + immunizationName)
-          .querySelector('.received__info')
-          .innerHTML;
+          .querySelectorAll('.received__info');
+
 };

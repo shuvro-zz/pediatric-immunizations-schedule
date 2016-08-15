@@ -1,6 +1,6 @@
 {
   "name": "pediatric-immunizations-schedule",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A small js library for displaying a pediatric immunizations schedule based on CDC recommendations.",
   "main": "dist/pediatric-immunizations-chart.js",
   "scripts": {
